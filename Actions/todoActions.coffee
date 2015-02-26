@@ -1,5 +1,5 @@
 todoConstants = require '../Constants/todoConstants'
-appDispatcher = require './appDispatcher'
+appDispatcher = require '../appDispatcher'
 
 module.exports =
   get: ->
@@ -18,5 +18,5 @@ module.exports =
 
   remove: (todo) ->
     appDispatcher.dispatchViewAction
-      type: todoConstants.EDIT_TODO
+      type: todoConstants.REMOVE_TODO
       body: todo

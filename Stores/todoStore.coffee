@@ -6,22 +6,38 @@ appDispatcher = require '../appDispatcher'
 EventEmitter = (require 'eventemitter').EventEmitter
 
 todoStore = assign {}, EventEmitter.prototype,
-  _todos:Immutable.List.of()
-  emitChange: -> @emit 'CHANGE'
-  addChangeListener: (callback) -> @addListener 'CHANGE', callback
-  removeChangeListener: (callback) -> @removeListener 'CHANGE', callback
-  getAll: -> @_todos
-  getId: -> @_todos.size
+  _todos:Immutable.OrderedMap()
+
+  _id: 0
+
+  emitChange: ->
+    @emit 'CHANGE'
+
+  addChangeListener: (callback) ->
+    @addListener 'CHANGE', callback
+
+  removeChangeListener: (callback) ->
+    @removeListener 'CHANGE', callback
+
+  getAll: ->
+    @_todos
+
+  getId: ->
+    @_id++
+
   onAdd: (todo) ->
-    @_todos = @_todos.push
+    id = do @getId
+    @_todos = @_todos.set id, Immutable.Map
+      id: id
       text: todo.text
-      id: do @getId
     do @emitChange
+
   onEdit: (todo) ->
-    @_todos = @_todos.set todo.id, todo
+    @_todos = @_todos.set todo.get('id'), todo
     do @emitChange
+
   onRemove: (todo) ->
-    @_todos = @_todos.delete todo.id
+    @_todos = @_todos.delete todo.get 'id'
     do @emitChange
 
 appDispatcher.register (payload) ->

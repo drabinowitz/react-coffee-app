@@ -7,11 +7,11 @@ TodoCreateForm = React.createClass
   handleSubmit: (e) ->
     do e.preventDefault
     do e.stopPropagation
-    @handleAdd text: @refs.addInput.getDOMNode().value
+    @props.handleAdd text: @refs.addInput.getDOMNode().value
 
   render: ->
     <form onSubmit={@handleSubmit}>
-      <input ref='addInput' />
+      <input ref='addInput' placeholder='add todo' />
     </form>
 
 module.exports = TodoCreateForm

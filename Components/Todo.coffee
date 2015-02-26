@@ -9,21 +9,29 @@ Todo = React.createClass
     handleEdit: React.PropTypes.func.isRequired
     handleRemove: React.PropTypes.func.isRequired
 
-  getInitialState: -> editing: false
-  componentWillReceiveProps: -> @setState editing: false
-  showEdit: -> @setState editing: true
+  getInitialState: ->
+    editing: false
+
+  componentWillReceiveProps: ->
+    @setState editing: false
+
+  showEdit: ->
+    @setState editing: true
+
   handleRemove: (e) ->
     do e.preventDefault
     do e.stopPropagation
     @props.handleRemove @props.todo
+
   handleEdit: (e) ->
     do e.preventDefault
     do e.stopPropagation
     @props. handleEdit @props.todo, @refs.editInput.getDOMNode().value
+
   render: ->
-    form = if @state.editing?
+    form = if @state.editing
       <form onSubmit={@handleEdit}>
-        <input ref='editInput' />
+        <input ref='editInput' defaultValue={@props.todo.get 'text'} />
       </form>
 
     <div>

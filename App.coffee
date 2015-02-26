@@ -1,4 +1,4 @@
 React = require 'react'
 TodoView = require './Components/TodoView'
 
-React.render <TodoView />, window.Document.getElementById 'content'
+React.render <TodoView />, window.document.getElementById 'content'

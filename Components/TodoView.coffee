@@ -29,9 +29,10 @@ TodoView = React.createClass
     todoActions.edit todo.set 'text', text
 
   render: ->
-    Todos = @state.todos.toArray().map (todo) -> <Todo key={todo.get 'id'} todo={todo} handleRemove={@removeTodo} handleEdit={@editTodo} />
+    Todos = @state.todos.toArray().map (todo) => <Todo key={todo.get 'id'} todo={todo} handleRemove={@removeTodo} handleEdit={@editTodo} />
 
     <div>
+      <h1>Todos</h1>
       <br />
       <TodoCreateForm handleAdd={@addTodo} />
       <br />
