@@ -10,10 +10,10 @@ TodoView = React.createClass
     todos: do todoStore.getAll
 
   listenerCallback: ->
-    @setState todos: do todoStore.getAll
+    @setState do @getInitialState if do @isMounted
 
   componentDidMount: ->
-    todoStore.addChangeListener @listenerCallback if do @isMounted
+    todoStore.addChangeListener @listenerCallback
     do todoActions.get
 
   componentWillUnmount: ->

@@ -26,7 +26,7 @@ Todo = React.createClass
   handleEdit: (e) ->
     do e.preventDefault
     do e.stopPropagation
-    @props. handleEdit @props.todo, @refs.editInput.getDOMNode().value
+    @props.handleEdit @props.todo, @refs.editInput.getDOMNode().value
 
   render: ->
     form = if @state.editing
