@@ -2,9 +2,9 @@ var gulp = require('gulp');
 var shell = require('gulp-shell');
 
 gulp.task('browserify', shell.task([
-  'browserify ./App.coffee -o bundle.js'
+  'browserify -d -t coffee-reactify --extension=".coffee" ./App.coffee -o bundle.js'
 ]));
 
 gulp.task('watchify', shell.task([
-  'watchify -d ./App.coffee -o bundle.js -v'
+  'watchify -d -t coffee-reactify --extension=".coffee" ./App.coffee -o bundle.js -v'
 ]));
